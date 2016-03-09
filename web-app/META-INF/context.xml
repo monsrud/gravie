@@ -1,0 +1,17 @@
+<Context>
+  <JarScanner>
+    <JarScanFilter
+        pluggabilityScan="${tomcat.util.scan.StandardJarScanFilter.jarsToScan},aws-java-sdk*.jar,
+                       poi*.jar,
+                       ooxml*.jar,
+                       itextpdf*.jar,
+                       xalan*.jar,
+                       groovy-all*.jar,
+                       apache-mime4j*.jar,
+                       grails-core*.jar,
+                       jackson*.jar,
+                       xmlbeans*.jar,
+                       spring-core*.jar,
+                       bcprov*.jar"/>
+  </JarScanner>
+</Context>
