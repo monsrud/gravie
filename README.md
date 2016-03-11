@@ -18,5 +18,6 @@ Also add any missing tests.
 Helpful links:
 
 http://www.gebish.org/manual/current/ for geb documentation
-http://spockframework.github.io/spock/docs/1.0/index.html
+
+http://spockframework.github.io/spock/docs/1.0/index.html for spock documentation
 
