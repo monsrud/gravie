@@ -15,3 +15,8 @@ The valid username/password that will authenticate properly is a@a.com/Password1
 The executed test will not pass.  As part of this exercise, get the existing test to pass.
 Also add any missing tests.
 
+Helpful links:
+
+http://www.gebish.org/manual/current/ for geb documentation
+http://spockframework.github.io/spock/docs/1.0/index.html
+
