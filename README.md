@@ -19,5 +19,5 @@ Helpful links:
 
 http://www.gebish.org/manual/current/ for geb documentation
 
-http://spockframework.github.io/spock/docs/1.0/index.html for spock documentation
+http://spockframework.org/spock/docs/1.2/index.html for spock documentation
 
