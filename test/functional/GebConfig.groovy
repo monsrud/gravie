@@ -7,7 +7,7 @@
 
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.chrome.ChromeOptions
 
 private void downloadDriver(File file, String path) {
     if (!file.exists()) {
@@ -19,23 +19,42 @@ private void downloadDriver(File file, String path) {
     }
 }
 
-driver = {
-    def chromeDriver = new File("test/drivers/chrome/chromedriver${System.properties['os.name'].toLowerCase().contains('windows') ? '.exe' : ''}")
+private static File downloadChromeDriver() {
+    final VERSION = '2.40'
+    final OS = System.properties['os.name'].toLowerCase()
+    final EXTENSION = OS.contains('windows') ? '.exe' : ''
+    File chromeDriver = new File("test/drivers/chrome/chromedriver${VERSION.replaceAll('\\.', '')}${EXTENSION}")
 
-    if (System.properties['os.name'].toLowerCase().contains('windows')) {
-        downloadDriver(chromeDriver, "http://chromedriver.storage.googleapis.com/2.20/chromedriver_win32.zip")
-    } else if (System.properties['os.name'].toLowerCase().contains('linux')) {
-        downloadDriver(chromeDriver, "http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux64.zip")
-    } else {
-        downloadDriver(chromeDriver, "http://chromedriver.storage.googleapis.com/2.20/chromedriver_mac32.zip")
+    if (!chromeDriver.exists()) {
+        String path
+        if (OS.contains('windows')) {
+            path = "http://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
+        } else if (OS.contains('linux')) {
+            path = "http://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+        } else {
+            path = "http://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_mac64.zip"
+        }
+        AntBuilder ant = new AntBuilder()
+        ant.get(src: path, dest: 'driver.zip')
+        ant.unzip(src: 'driver.zip', dest: chromeDriver.parent)
+        ant.delete(file: 'driver.zip')
+        ant.move(file: new File(chromeDriver.parent + "/chromedriver${EXTENSION}"), toFile: chromeDriver)
+        ant.chmod(file: chromeDriver, perm: '700')
     }
+
+    return chromeDriver
+}
+
+driver = {
+    File chromeDriver = downloadChromeDriver()
     System.setProperty('webdriver.chrome.driver', chromeDriver.absolutePath)
 
-    DesiredCapabilities capabilities = DesiredCapabilities.chrome()
-    def driverInstance = new ChromeDriver(capabilities)
+    ChromeOptions options = new ChromeOptions()
+    def driverInstance = new ChromeDriver(options)
     driverInstance.manage().window().setSize(new Dimension(1280, 1024))
     driverInstance
 }
+
 baseUrl = "${System.getenv("BASE_URL") ?: (System.getProperty("baseUrl") ?: "http://localhost:8006/gravie-sdet-test")}/"
 reportsDir = "target/geb-reports"
 environments {

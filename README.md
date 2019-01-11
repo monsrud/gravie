@@ -1,21 +1,28 @@
 gravie-sdet-test
 ======
 
-Install grails 2.5.3
-Install jdk 8
+### Setup
+* Install grails 2.5.6
+* Install jdk 8
 
 Open a new console and start up the app using the command below:
+```
 grails -Dgrails.env=test -Dgrails.test.phase=functional run-app
+```
 
 Open a new console and run the test using the command below:
+```
 grails test-app functional: specs.general.DashboardSpec -echoOut -echoErr
+```
+
+### Exercise
+The existing test does not pass. 
+As part of this exercise, make the necessary changes to get it to pass.
+Also add other relevant tests the test the underlying functionality.
 
 The valid username/password that will authenticate properly is a@a.com/Password1
 
-The executed test will not pass.  As part of this exercise, get the existing test to pass.
-Also add any missing tests.
-
-Helpful links:
+### Helpful links:
 
 http://www.gebish.org/manual/current/ for geb documentation
 
