@@ -22,7 +22,7 @@ grails.server.port.http = port
 grails.project.dependency.resolver = "maven"
 
 grails.project.dependency.resolution = {
-    def seleniumVersion = "3.14.0"
+    def seleniumVersion = "3.141.59"
     // inherit Grails' default dependencies
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
@@ -46,11 +46,11 @@ grails.project.dependency.resolution = {
     dependencies {
         test("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion") {}
         test("org.seleniumhq.selenium:selenium-support:$seleniumVersion")
-        test("org.gebish:geb-spock:2.2")
+        test("org.gebish:geb-spock:2.3.1")
     }
 
     plugins {
-        build ":tomcat:8.0.30"
+        build ":tomcat:8.0.33"
         test ":geb:1.0"
         test ":remote-control:2.0"
     }
