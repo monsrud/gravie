@@ -9,6 +9,7 @@ import org.openqa.selenium.Dimension
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
+
 private void downloadDriver(File file, String path) {
     if (!file.exists()) {
         def ant = new AntBuilder()
@@ -56,7 +57,9 @@ driver = {
 }
 
 baseUrl = "${System.getenv("BASE_URL") ?: (System.getProperty("baseUrl") ?: "http://localhost:8006/gravie-sdet-test")}/"
+
 reportsDir = "target/geb-reports"
+
 environments {
     // run as “grails -Dgeb.env=chrome test-app”
     // See: http://code.google.com/p/selenium/wiki/ChromeDriver
